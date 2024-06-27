@@ -6,7 +6,7 @@ const trashIcons = document.querySelectorAll('.fa-trash-alt');
 const likeIcons = document.querySelectorAll('.fa-heart');
 
 let total = 0;
-let likedProducts = []; // Array to store liked product indexes
+let likedProducts = []; 
 
 function updateTotalPrice() {
   totalPriceSpan.textContent = `Total: $${total.toFixed(2)}`;
@@ -47,30 +47,27 @@ trashIcons.forEach((icon, index) => {
   icon.addEventListener('click', () => {
     quantities[index].textContent = 0;
     const productPrice = parseFloat(document.querySelectorAll('.unit-price')[index].textContent.slice(0, -1));
-    total -= productPrice * parseInt(quantities[index].textContent); // Ensure total is updated even if quantity is already 0
+    total -= productPrice * parseInt(quantities[index].textContent); 
     updateTotalPrice();
+ 
 
-    // Option 1: Hide the product container
     const productContainer = icon.parentElement.parentElement.parentElement;
     productContainer.style.display = 'none';
 
-    // Option 2: Remove the product container from the DOM (more memory efficient)
-    // productContainer.remove();
 
-    // Remove liked product from likedProducts array if liked
     updateLikedProducts(likeIcons[index].classList.contains('liked'), index);
   });
 });
 
 likeIcons.forEach((icon, index) => {
   icon.addEventListener('click', () => {
-    icon.classList.toggle('liked'); // Toggle liked class
+    icon.classList.toggle('liked'); 
 
-    // Change color to pink when liked
+   
     if (icon.classList.contains('liked')) {
       icon.style.color = 'pink';
     } else {
-      icon.style.color = 'black'; // Reset color to black when unliked
+      icon.style.color = 'black'; 
     }
 
     updateLikedProducts(icon.classList.contains('liked'), index);
